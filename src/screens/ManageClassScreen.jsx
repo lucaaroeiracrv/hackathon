@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ManageClassScreen({ route, navigation }) {
@@ -89,11 +89,7 @@ export default function ManageClassScreen({ route, navigation }) {
         value={studentName}
         onChangeText={setStudentName}
       />
-
-      {/* Botão Adicionar Aluno estilizado */}
-      <TouchableOpacity style={styles.addButton} onPress={addStudent}>
-        <Text style={styles.addButtonText}>Adicionar Aluno</Text>
-      </TouchableOpacity>
+      <Button title="Adicionar Aluno" onPress={addStudent} />
 
       <FlatList
         data={students}
@@ -101,12 +97,8 @@ export default function ManageClassScreen({ route, navigation }) {
           <View style={styles.item}>
             <Text style={styles.studentName}>{item.name}</Text>
             <View style={styles.actions}>
-              <TouchableOpacity onPress={() => handleEditStudent(item)}>
-                <Text>Editar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleDeleteStudent(item)}>
-                <Text>Excluir</Text>
-              </TouchableOpacity>
+              <Button title="Editar" onPress={() => handleEditStudent(item)} />
+              <Button title="Excluir" onPress={() => handleDeleteStudent(item)} />
             </View>
           </View>
         )}
@@ -127,12 +119,8 @@ export default function ManageClassScreen({ route, navigation }) {
               value={editedStudentName}
               onChangeText={setEditedStudentName}
             />
-            <TouchableOpacity onPress={saveEditedStudent}>
-              <Text>Salvar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text>Cancelar</Text>
-            </TouchableOpacity>
+            <Button title="Salvar" onPress={saveEditedStudent} />
+            <Button title="Cancelar" onPress={() => setModalVisible(false)} />
           </View>
         </View>
       </Modal>
@@ -179,19 +167,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     alignItems: 'center',
-  },
-  addButton: {
-    position: 'absolute',
-    bottom: 20,
-    left: '10%',
-    right: '10%',
-    backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 50,
-    alignItems: 'center',
-  },
-  addButtonText: {
-    color: '#fff',
-    fontSize: 16,
   },
 });
