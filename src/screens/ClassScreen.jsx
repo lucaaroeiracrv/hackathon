@@ -66,7 +66,6 @@ export default function ClassScreen({ navigation }) {
         value={className}
         onChangeText={setClassName}
       />
-      <Button title="Adicionar Turma" onPress={addClassroom} />
 
       <FlatList
         data={classrooms}
@@ -83,6 +82,11 @@ export default function ClassScreen({ navigation }) {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
+
+    
+      <TouchableOpacity style={styles.addButton} onPress={addClassroom}>
+        <Text style={styles.addButtonText}>Adicionar Turma</Text>
+      </TouchableOpacity>
 
       <Modal
         visible={modalVisible}
@@ -146,5 +150,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     alignItems: 'center',
+  },
+  addButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: '10%',
+    right: '10%',
+    backgroundColor: '#007bff',
+    padding: 15,
+    borderRadius: 50,
+    alignItems: 'center',
+  },
+  addButtonText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });
